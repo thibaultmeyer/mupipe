@@ -6,8 +6,8 @@ package io.github.thibaultmeyer.mupipe.sink;
 public class ConsoleOutputSink implements Sink<Object> {
 
     @Override
-    public void execute(final Object item) throws Exception {
+    public void execute(final Object element) throws Exception {
 
-        System.out.println(item);
+        System.out.println(element);
     }
 }

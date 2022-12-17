@@ -5,12 +5,13 @@ import io.github.thibaultmeyer.mupipe.source.Source;
 import io.github.thibaultmeyer.mupipe.task.Task;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Pipeline builder.
  */
-public class PipelineBuilder {
+public final class PipelineBuilder {
 
     private final PipelineInitialData pipelineInitialData;
 
@@ -22,80 +23,162 @@ public class PipelineBuilder {
         this.pipelineInitialData = new PipelineInitialData();
     }
 
+    /**
+     * Adds a source.
+     *
+     * @param source Source to add
+     * @param <R>    Type of elements returned by the source
+     * @return Current pipeline builder instance
+     */
     public <R> PipelineBuilderStageSource<R> addSource(final Source<R> source) {
 
         this.pipelineInitialData.sourceList.add(source);
         return new PipelineBuilderStageSource<>(this.pipelineInitialData);
     }
 
-    public <I, O> PipelineBuilderStageTask<O> addTask(final Task<I, O> task) {
+    /**
+     * Adds multiple sources.
+     *
+     * @param sourceCollection Sources to add
+     * @param <R>              Type of elements returned by the source
+     * @return Current pipeline builder instance
+     */
+    public <R> PipelineBuilderStageSource<R> addSource(final Collection<Source<R>> sourceCollection) {
 
-        this.pipelineInitialData.taskList.add(task);
+        this.pipelineInitialData.sourceList.addAll(sourceCollection);
+        return new PipelineBuilderStageSource<>(this.pipelineInitialData);
+    }
+
+    /**
+     * Indicates that no source is required while specifying the type of elements that will be processed.
+     *
+     * @param <R> Type of elements returned by the source
+     * @return Current pipeline builder instance
+     */
+    public <R> PipelineBuilderStageTask<R> noSource() {
+
         return new PipelineBuilderStageTask<>(this.pipelineInitialData);
     }
 
-    public final static class PipelineBuilderStageSource<R> {
+    /**
+     * Pipeline builder: Source.
+     *
+     * @param <R> Type of elements returned by the source
+     */
+    public final static class PipelineBuilderStageSource<R> extends PipelineBuilderStageTask<R> {
 
-        private final PipelineInitialData pipelineInitialData;
-
+        /**
+         * Build anew instance.
+         *
+         * @param pipelineInitialData Pipeline initial data
+         */
         public PipelineBuilderStageSource(final PipelineInitialData pipelineInitialData) {
-            this.pipelineInitialData = pipelineInitialData;
+
+            super(pipelineInitialData);
         }
 
+        /**
+         * Adds a source.
+         *
+         * @param source Source to add
+         * @return Current pipeline builder instance
+         */
         public PipelineBuilderStageSource<R> addSource(final Source<R> source) {
 
             this.pipelineInitialData.sourceList.add(source);
-            return this;
+            return new PipelineBuilderStageSource<>(this.pipelineInitialData);
         }
 
-        public <O> PipelineBuilderStageTask<O> addTask(final Task<R, O> task) {
+        /**
+         * Adds multiple sources.
+         *
+         * @param sourceCollection Sources to add
+         * @return Current pipeline builder instance
+         */
+        public PipelineBuilderStageSource<R> addSource(final Collection<Source<R>> sourceCollection) {
+
+            this.pipelineInitialData.sourceList.addAll(sourceCollection);
+            return new PipelineBuilderStageSource<>(this.pipelineInitialData);
+        }
+    }
+
+    /**
+     * Pipeline builder: Task.
+     *
+     * @param <I> Input element type
+     */
+    public static class PipelineBuilderStageTask<I> extends PipelineBuilderStageSink<I> {
+
+        /**
+         * Build anew instance.
+         *
+         * @param pipelineInitialData Pipeline initial data
+         */
+        private PipelineBuilderStageTask(final PipelineInitialData pipelineInitialData) {
+            super(pipelineInitialData);
+        }
+
+        /**
+         * Adds a task.
+         *
+         * @param task Task to add
+         * @param <O>  Output element type
+         * @return Current pipeline builder instance
+         */
+        public <O> PipelineBuilderStageTask<O> addTask(final Task<I, O> task) {
 
             this.pipelineInitialData.taskList.add(task);
             return new PipelineBuilderStageTask<>(this.pipelineInitialData);
         }
+    }
 
-        public <W> PipelineBuilderStageSink<W> addSink(final Sink<W> sink) {
+    /**
+     * Pipeline builder: Sink.
+     *
+     * @param <I> Input element type
+     */
+    public static class PipelineBuilderStageSink<I> {
+
+        final PipelineInitialData pipelineInitialData;
+
+        /**
+         * Build anew instance.
+         *
+         * @param pipelineInitialData Pipeline initial data
+         */
+        private PipelineBuilderStageSink(final PipelineInitialData pipelineInitialData) {
+            this.pipelineInitialData = pipelineInitialData;
+        }
+
+        /**
+         * Adds a sink.
+         *
+         * @param sink Sink to add
+         * @return Current pipeline builder instance
+         */
+        public PipelineBuilderStageSink<I> addSink(final Sink<I> sink) {
 
             this.pipelineInitialData.sinkList.add(sink);
             return new PipelineBuilderStageSink<>(this.pipelineInitialData);
         }
-    }
 
-    public final static class PipelineBuilderStageTask<I> {
+        /**
+         * Adds multiple sinks.
+         *
+         * @param sinkCollection Sinks to add
+         * @return Current pipeline builder instance
+         */
+        public PipelineBuilderStageSink<I> addSink(final Collection<Sink<I>> sinkCollection) {
 
-        private final PipelineInitialData pipelineInitialData;
-
-        public PipelineBuilderStageTask(final PipelineInitialData pipelineInitialData) {
-            this.pipelineInitialData = pipelineInitialData;
-        }
-
-        public <R> PipelineBuilderStageTask<R> addTask(final Task<I, R> task) {
-
-            this.pipelineInitialData.taskList.add(task);
-            return new PipelineBuilderStageTask<>(this.pipelineInitialData);
-        }
-
-        public <W> PipelineBuilderStageSink<W> addSink(final Sink<W> sink) {
-
-            this.pipelineInitialData.sinkList.add(sink);
+            this.pipelineInitialData.sinkList.addAll(sinkCollection);
             return new PipelineBuilderStageSink<>(this.pipelineInitialData);
         }
-    }
 
-    public final static class PipelineBuilderStageSink<W> {
-
-        private final PipelineInitialData pipelineInitialData;
-
-        public PipelineBuilderStageSink(final PipelineInitialData pipelineInitialData) {
-            this.pipelineInitialData = pipelineInitialData;
-        }
-
-        public PipelineBuilderStageSink<W> addSink(final Sink<W> sink) {
-
-            this.pipelineInitialData.sinkList.add(sink);
-            return this;
-        }
-
+        /**
+         * Build the pipeline
+         *
+         * @return A pipeline
+         */
         public Pipeline build() {
 
             return new Pipeline(

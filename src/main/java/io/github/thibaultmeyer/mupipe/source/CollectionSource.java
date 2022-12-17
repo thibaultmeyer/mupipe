@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Reads item from a collection.
+ * Reads elements from a collection.
  *
- * @param <T> Item type
+ * @param <T> Element type
  */
 public final class CollectionSource<T> implements Source<T> {
 
@@ -29,7 +29,7 @@ public final class CollectionSource<T> implements Source<T> {
     }
 
     @Override
-    public T nextItem() {
+    public T nextElement() {
 
         return this.source.next();
     }

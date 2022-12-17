@@ -4,7 +4,6 @@ import io.github.thibaultmeyer.mupipe.sink.Sink;
 import io.github.thibaultmeyer.mupipe.source.Source;
 import io.github.thibaultmeyer.mupipe.task.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,16 +14,6 @@ public final class Pipeline {
     private final List<Source<Object>> sourceList;
     private final List<Task<Object, Object>> taskList;
     private final List<Sink<Object>> sinkList;
-
-    /**
-     * Build a new instance.
-     */
-    public Pipeline() {
-
-        this.sourceList = new ArrayList<>();
-        this.taskList = new ArrayList<>();
-        this.sinkList = new ArrayList<>();
-    }
 
     /**
      * Build a new instance.
@@ -43,60 +32,52 @@ public final class Pipeline {
         this.sinkList = (List<Sink<Object>>) (Object) sinkList;
     }
 
-    @SuppressWarnings("unchecked")
-    public Pipeline addSink(final Sink<?> sink) {
+    /**
+     * Creates a new pipeline builder.
+     *
+     * @return Newly created pipeline builder
+     */
+    public static PipelineBuilder newBuilder() {
 
-        this.sinkList.add((Sink<Object>) sink);
-        return this;
+        return new PipelineBuilder();
     }
 
-    @SuppressWarnings("unchecked")
-    public Pipeline addSource(final Source<?> source) {
-
-        this.sourceList.add((Source<Object>) source);
-        return this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public Pipeline addTask(final Task<?, ?> task) {
-
-        this.taskList.add((Task<Object, Object>) task);
-        return this;
-    }
-
+    /**
+     * Starts the pipeline.
+     */
     public void execute() {
 
         for (int idx = 0; idx < this.sourceList.size(); idx += 1) {
 
             final Source<?> source = this.sourceList.get(idx);
             while (source.hasNext()) {
-                final Object item = source.nextItem();
-                final boolean isLastItemFromSource = !source.hasNext() && (idx >= this.sourceList.size() - 1);
+                final Object element = source.nextElement();
+                final boolean isLastElementFromSource = !source.hasNext() && (idx >= this.sourceList.size() - 1);
 
-                this.proceedOnItem(item, isLastItemFromSource);
+                this.processCurrentElement(element, isLastElementFromSource);
             }
         }
     }
 
-    private void proceedOnItem(final Object item, final boolean isLastItemFromSource) {
+    private void processCurrentElement(final Object element, final boolean isLastElementFromSource) {
 
-        Object currentItem = item;
+        Object currentElement = element;
         for (final Task<Object, Object> task : this.taskList) {
             try {
-                currentItem = task.execute(currentItem, isLastItemFromSource);
+                currentElement = task.execute(currentElement, isLastElementFromSource);
             } catch (final Exception ex) {
                 ex.printStackTrace();
                 // TODO: Do something with exception
             }
 
-            if (currentItem == null) {
+            if (currentElement == null) {
                 return;
             }
         }
 
         for (final Sink<Object> sink : this.sinkList) {
             try {
-                sink.execute(currentItem);
+                sink.execute(currentElement);
             } catch (final Exception ex) {
                 ex.printStackTrace();
                 // TODO: Do something with exception

@@ -1,23 +1,23 @@
 package io.github.thibaultmeyer.mupipe.source;
 
 /**
- * Source.
+ * Source is a starting point of a pipeline which produce elements to process.
  *
- * @param <T> Read item type
+ * @param <R> Type of elements produced by the source
  */
-public interface Source<T> {
+public interface Source<R> {
 
     /**
-     * Checks if the source has item available.
+     * Checks if the source has element available.
      *
-     * @return {@code true} if the source has item available, otherwise {@code false}
+     * @return {@code true} if the source has element available, otherwise {@code false}
      */
     boolean hasNext();
 
     /**
-     * Gets the next item.
+     * Gets the next element.
      *
-     * @return Next item
+     * @return Next element
      */
-    T nextItem();
+    R nextElement();
 }

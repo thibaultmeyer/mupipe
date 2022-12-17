@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * Routes items to another pipelines.
+ * Routes element to specific pipeline.
  *
- * @param <I> Input item type
+ * @param <I> Input element type
  */
 public class RouterTask<I> implements Task<I, Void> {
 
@@ -32,34 +32,34 @@ public class RouterTask<I> implements Task<I, Void> {
 
         for (final Pipeline pipeline : pipelineCollection) {
 
-            final PipelineMethodHandler handler = this.retrievePipelineProceedOnItemMethod(pipeline);
+            final PipelineMethodHandler handler = this.retrievePipelineprocessCurrentElementMethod(pipeline);
             this.pipelineMethodHandlerList.add(handler);
         }
     }
 
     @Override
-    public Void execute(final I item, final boolean isLastItemFromSource) throws Exception {
+    public Void execute(final I element, final boolean isLastElementFromSource) throws Exception {
 
-        final Integer idx = this.pipelineDecisionMakerFunction.apply(item);
+        final Integer idx = this.pipelineDecisionMakerFunction.apply(element);
         final PipelineMethodHandler handler = this.pipelineMethodHandlerList.get(idx);
 
         if (handler != null) {
-            handler.method.invoke(handler.instance, item, isLastItemFromSource);
+            handler.method.invoke(handler.instance, element, isLastElementFromSource);
         }
 
         return null;
     }
 
     /**
-     * Retrieves the private method "proceedOnItem".
+     * Retrieves the private method "processCurrentElement".
      *
      * @param pipeline Pipeline
-     * @return Method "proceedOnItem", otherwise, {@code null}
+     * @return Method "processCurrentElement", otherwise, {@code null}
      */
-    private PipelineMethodHandler retrievePipelineProceedOnItemMethod(final Pipeline pipeline) {
+    private PipelineMethodHandler retrievePipelineprocessCurrentElementMethod(final Pipeline pipeline) {
 
         for (final Method method : pipeline.getClass().getDeclaredMethods()) {
-            if (method.getName().equals("proceedOnItem")) {
+            if (method.getName().equals("processCurrentElement")) {
                 method.setAccessible(true);
                 return new PipelineMethodHandler(pipeline, method);
             }

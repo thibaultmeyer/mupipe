@@ -3,27 +3,27 @@ package io.github.thibaultmeyer.mupipe.sink;
 import java.util.Collection;
 
 /**
- * Stores pipeline output into a collection.
+ * Stores pipeline elements into a collection.
  *
- * @param <T> Wrote item type
+ * @param <I> Input element type
  */
-public class CollectionSink<T> implements Sink<T> {
+public class CollectionSink<I> implements Sink<I> {
 
-    private final Collection<T> itemList;
+    private final Collection<I> elementCollection;
 
     /**
      * Build a new instance.
      *
-     * @param itemList List in which to write the items
+     * @param elementCollection Collection in which to write the elements
      */
-    public CollectionSink(final Collection<T> itemList) {
+    public CollectionSink(final Collection<I> elementCollection) {
 
-        this.itemList = itemList;
+        this.elementCollection = elementCollection;
     }
 
     @Override
-    public void execute(final T item) throws Exception {
+    public void execute(final I element) throws Exception {
 
-        this.itemList.add(item);
+        this.elementCollection.add(element);
     }
 }

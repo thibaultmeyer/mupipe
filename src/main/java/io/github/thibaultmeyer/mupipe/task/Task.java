@@ -1,20 +1,20 @@
 package io.github.thibaultmeyer.mupipe.task;
 
 /**
- * Task.
+ * Task is a small component that performs operations on every element passing through the pipeline.
  *
- * @param <I> Input item type
- * @param <O> Output item type
+ * @param <I> Input element type
+ * @param <O> Output element type
  */
 public interface Task<I, O> {
 
     /**
      * Executes task.
      *
-     * @param item                 Item on which perform task
-     * @param isLastItemFromSource Indicates if the current item is the last one,
-     * @return Item transformed by the task
+     * @param element                 Element on which perform task
+     * @param isLastElementFromSource Indicates if the current element is the last one,
+     * @return Element transformed by the task
      * @throws Exception If something goes wrong
      */
-    O execute(final I item, final boolean isLastItemFromSource) throws Exception;
+    O execute(final I element, final boolean isLastElementFromSource) throws Exception;
 }

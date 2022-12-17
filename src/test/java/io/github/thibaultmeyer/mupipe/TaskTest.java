@@ -1,7 +1,6 @@
 package io.github.thibaultmeyer.mupipe;
 
 import io.github.thibaultmeyer.mupipe.sink.CollectionSink;
-import io.github.thibaultmeyer.mupipe.sink.Sink;
 import io.github.thibaultmeyer.mupipe.source.CollectionSource;
 import io.github.thibaultmeyer.mupipe.task.AccumulatorTask;
 import io.github.thibaultmeyer.mupipe.task.GroupByTask;
@@ -20,31 +19,16 @@ import java.util.Map;
 final class TaskTest {
 
     @Test
-    void builder() {
-
-        final List<String> sinkStoreList = new ArrayList<>();
-        new PipelineBuilder()
-            .addSource(new CollectionSource<>(List.of("1", "2", "3")))
-            .addSource(new CollectionSource<>(List.of("4")))
-            .addTask((item, isLastItemFromSource) -> Integer.parseInt(item))
-            .addTask((item, isLastItemFromSource) -> String.valueOf(item))
-            .addSink(new CollectionSink<>(sinkStoreList))
-            .build()
-            .execute();
-
-        System.err.println(sinkStoreList);
-    }
-
-    @Test
     void accumulator() {
 
         // Arrange
         final List<List<String>> sinkStoreList = new ArrayList<>();
-        final Pipeline pipeline = new Pipeline()
+        final Pipeline pipeline = Pipeline.newBuilder()
             .addSource(new CollectionSource<>(List.of("apple", "banana", "pear")))
             .addSource(new CollectionSource<>(List.of("cranberry", "strawberry")))
-            .addTask(new AccumulatorTask<String>(2))
-            .addSink(new CollectionSink<>(sinkStoreList));
+            .addTask(new AccumulatorTask<>(2))
+            .addSink(new CollectionSink<>(sinkStoreList))
+            .build();
 
         // Act
         pipeline.execute();
@@ -61,10 +45,11 @@ final class TaskTest {
 
         // Arrange
         final Map<String, List<String>> sinkStoreMap = new HashMap<>();
-        final Pipeline pipeline = new Pipeline()
+        final Pipeline pipeline = Pipeline.newBuilder()
             .addSource(new CollectionSource<>(List.of("cherry", "blueberry", "banana", "apple")))
-            .addTask(new GroupByTask<String, String>((item) -> String.valueOf(item.charAt(0))))
-            .addSink((Sink<Map<String, List<String>>>) sinkStoreMap::putAll);
+            .addTask(new GroupByTask<>((element) -> String.valueOf(element.charAt(0))))
+            .addSink(sinkStoreMap::putAll)
+            .build();
 
         // Act
         pipeline.execute();
@@ -83,15 +68,20 @@ final class TaskTest {
         final List<Integer> evenSinkStoreList = new ArrayList<>();
         final List<Integer> oddSinkStoreList = new ArrayList<>();
 
-        final Pipeline evenPipeline = new Pipeline()
-            .addSink(new CollectionSink<>(evenSinkStoreList));
+        final Pipeline evenPipeline = Pipeline.newBuilder()
+            .<Integer>noSource()
+            .addSink(new CollectionSink<>(evenSinkStoreList))
+            .build();
 
-        final Pipeline oddPipeline = new Pipeline()
-            .addSink(new CollectionSink<>(oddSinkStoreList));
+        final Pipeline oddPipeline = Pipeline.newBuilder()
+            .<Integer>noSource()
+            .addSink(new CollectionSink<>(oddSinkStoreList))
+            .build();
 
-        final Pipeline pipeline = new Pipeline()
+        final Pipeline pipeline = Pipeline.newBuilder()
             .addSource(new CollectionSource<>(List.of(1, 2, 3, 4, 5, 6)))
-            .addTask(new RouterTask<Integer>(List.of(evenPipeline, oddPipeline), (item) -> item % 2));
+            .addTask(new RouterTask<>(List.of(evenPipeline, oddPipeline), (element) -> element % 2))
+            .build();
 
         // Act
         pipeline.execute();

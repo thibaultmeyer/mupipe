@@ -1,17 +1,17 @@
 package io.github.thibaultmeyer.mupipe.sink;
 
 /**
- * Sink.
+ * Sink is an end point which accepts an element without returning any.
  *
- * @param <T> Wrote item type
+ * @param <I> Input element type
  */
-public interface Sink<T> {
+public interface Sink<I> {
 
     /**
      * Execute sink.
      *
-     * @param item Item to write
+     * @param element Element on which perform sink
      * @throws Exception If something goes wrong
      */
-    void execute(final T item) throws Exception;
+    void execute(final I element) throws Exception;
 }
