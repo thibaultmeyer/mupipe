@@ -115,6 +115,7 @@ public final class PipelineBuilder {
          * @param pipelineInitialData Pipeline initial data
          */
         private PipelineBuilderStageTask(final PipelineInitialData pipelineInitialData) {
+
             super(pipelineInitialData);
         }
 
@@ -147,6 +148,7 @@ public final class PipelineBuilder {
          * @param pipelineInitialData Pipeline initial data
          */
         private PipelineBuilderStageSink(final PipelineInitialData pipelineInitialData) {
+
             this.pipelineInitialData = pipelineInitialData;
         }
 

@@ -36,8 +36,6 @@ public final class GroupByTask<I, OK> implements Task<I, Map<OK, List<I>>> {
 
         elementList.add(element);
 
-        return isLastElementFromSource
-            ? this.elementMap
-            : null;
+        return isLastElementFromSource ? this.elementMap : null;
     }
 }

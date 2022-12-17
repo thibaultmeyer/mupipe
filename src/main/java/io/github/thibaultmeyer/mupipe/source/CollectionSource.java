@@ -33,4 +33,10 @@ public final class CollectionSource<T> implements Source<T> {
 
         return this.source.next();
     }
+
+    @Override
+    public void close() {
+
+        // Nothing to do
+    }
 }

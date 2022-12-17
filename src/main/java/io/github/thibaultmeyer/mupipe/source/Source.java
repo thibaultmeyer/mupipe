@@ -5,7 +5,7 @@ package io.github.thibaultmeyer.mupipe.source;
  *
  * @param <R> Type of elements produced by the source
  */
-public interface Source<R> {
+public interface Source<R> extends AutoCloseable {
 
     /**
      * Checks if the source has element available.
