@@ -202,7 +202,7 @@ public final class PipelineBuilder {
         /**
          * Build a new instance.
          */
-        public PipelineInitialData() {
+        private PipelineInitialData() {
 
             this.sourceList = new ArrayList<>();
             this.taskList = new ArrayList<>();

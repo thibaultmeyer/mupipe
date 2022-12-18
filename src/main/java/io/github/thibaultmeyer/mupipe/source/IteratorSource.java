@@ -32,10 +32,4 @@ public final class IteratorSource<T> implements Source<T> {
 
         return this.source.next();
     }
-
-    @Override
-    public void close() {
-
-        // Nothing to do
-    }
 }

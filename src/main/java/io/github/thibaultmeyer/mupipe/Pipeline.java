@@ -45,8 +45,17 @@ public final class Pipeline {
 
     /**
      * Starts the pipeline.
+     *
+     * @throws PipelineException If an error occurs during the processing of the pipeline
      */
     public void execute() {
+
+        try {
+            this.openAllSourceAndSink();
+        } catch (final PipelineException exception) {
+            this.closeAllSourceAndSink();
+            throw exception;
+        }
 
         for (int idx = 0; idx < this.sourceList.size(); idx += 1) {
 
@@ -57,6 +66,38 @@ public final class Pipeline {
 
                 this.processCurrentElement(element, isLastElementFromSource);
             }
+        }
+
+        this.closeAllSourceAndSink();
+    }
+
+    private void openAllSourceAndSink() {
+
+        for (final Source<?> source : this.sourceList) {
+            try {
+                source.open();
+            } catch (final Exception exception) {
+                throw new PipelineException.CannotOpenSource(source, exception);
+            }
+        }
+
+        for (final Sink<?> sink : this.sinkList) {
+            try {
+                sink.open();
+            } catch (final Exception exception) {
+                throw new PipelineException.CannotOpenSink(sink, exception);
+            }
+        }
+    }
+
+    private void closeAllSourceAndSink() {
+
+        for (final Source<?> source : this.sourceList) {
+            this.closeWithoutException(source);
+        }
+
+        for (final Sink<?> sink : this.sinkList) {
+            this.closeWithoutException(sink);
         }
     }
 
@@ -80,6 +121,23 @@ public final class Pipeline {
                 sink.execute(currentElement);
             } catch (final Exception ex) {
                 throw new PipelineException.SinkFailure(ex);
+            }
+        }
+    }
+
+    /**
+     * Closes the given closeable without any exceptions.
+     * This is typically used in finally blocks.
+     *
+     * @param autoCloseable The closeable to close
+     */
+    private void closeWithoutException(final AutoCloseable autoCloseable) {
+
+        if (autoCloseable != null) {
+            try {
+                autoCloseable.close();
+            } catch (final Exception ignore) {
+                // This exception is not important
             }
         }
     }
