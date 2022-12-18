@@ -31,5 +31,26 @@ To speed up process, you can ignore unit tests by using: `-DskipTests=true -Dmav
 
 
 
+## How to use
+
+```xml
+<dependency>
+  <groupId>io.github.thibaultmeyer</groupId>
+  <artifactId>mupipe</artifactId>
+  <version>x.y.z</version>
+</dependency>
+```
+
+
+```java
+final Pipeline pipeline = Pipeline.newBuilder()
+    .addSource(new CollectionSource<>(List.of(1, 2, 3, 4, 5, 6)))
+    .addTask(new FilterTask<>((element) -> element % 2 == 0))
+    .addSink(new ConsoleOutputSink<>())
+    .build();
+```
+
+
+
 ## License
 This project is released under terms of the [MIT license](https://raw.githubusercontent.com/thibaultmeyer/mupipe/master/LICENSE).
