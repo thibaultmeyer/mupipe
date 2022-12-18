@@ -39,8 +39,6 @@ final class ConsoleSinkTest {
         sink.execute("cranberry");
 
         // Assert
-        Assertions.assertEquals(26, outputStreamCaptor.size());
-
         final String removedLineFeed = outputStreamCaptor.toString().replace("\r", "").replace("\n", "");
         Assertions.assertEquals("applebananacranberry", removedLineFeed);
     }
