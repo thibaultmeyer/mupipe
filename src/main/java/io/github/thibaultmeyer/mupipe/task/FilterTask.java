@@ -25,7 +25,7 @@ public class FilterTask<T> implements Task<T, T> {
     @Override
     public T execute(final T element, final boolean isLastElementFromSource) throws Exception {
 
-        if (this.filteringDecisionFunction.apply(element)) {
+        if (this.filteringDecisionFunction.apply(element) == Boolean.TRUE) {
             return element;
         }
 

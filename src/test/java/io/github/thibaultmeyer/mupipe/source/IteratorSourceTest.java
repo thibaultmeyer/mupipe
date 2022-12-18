@@ -5,6 +5,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -51,7 +52,7 @@ final class IteratorSourceTest {
     void nextElementNoMoreElement() throws Exception {
 
         // Arrange
-        final Iterator<String> dataList = List.<String>of().iterator();
+        final Iterator<String> dataList = Collections.emptyIterator();
         final Source<String> source = new IteratorSource<>(dataList);
 
         // Act

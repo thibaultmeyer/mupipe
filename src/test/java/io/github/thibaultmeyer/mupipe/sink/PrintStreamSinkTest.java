@@ -11,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
-final class ConsoleSinkTest {
+final class PrintStreamSinkTest {
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -31,7 +31,7 @@ final class ConsoleSinkTest {
     void execute() throws Exception {
 
         // Arrange
-        final Sink<String> sink = new ConsoleOutputSink<>();
+        final Sink<String> sink = new PrintStreamOutputSink<>(System.out);
 
         // Act
         sink.execute("apple");

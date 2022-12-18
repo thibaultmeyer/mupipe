@@ -1,5 +1,6 @@
 package io.github.thibaultmeyer.mupipe;
 
+import io.github.thibaultmeyer.mupipe.exception.PipelineException;
 import io.github.thibaultmeyer.mupipe.sink.Sink;
 import io.github.thibaultmeyer.mupipe.source.Source;
 import io.github.thibaultmeyer.mupipe.task.Task;
@@ -66,8 +67,7 @@ public final class Pipeline {
             try {
                 currentElement = task.execute(currentElement, isLastElementFromSource);
             } catch (final Exception ex) {
-                ex.printStackTrace();
-                // TODO: Do something with exception
+                throw new PipelineException.SourceFailure(ex);
             }
 
             if (currentElement == null) {
@@ -79,8 +79,7 @@ public final class Pipeline {
             try {
                 sink.execute(currentElement);
             } catch (final Exception ex) {
-                ex.printStackTrace();
-                // TODO: Do something with exception
+                throw new PipelineException.SinkFailure(ex);
             }
         }
     }

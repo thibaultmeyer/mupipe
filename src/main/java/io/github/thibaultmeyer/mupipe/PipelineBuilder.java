@@ -65,7 +65,7 @@ public final class PipelineBuilder {
      *
      * @param <R> Type of elements returned by the source
      */
-    public final static class PipelineBuilderStageSource<R> extends PipelineBuilderStageTask<R> {
+    public static final class PipelineBuilderStageSource<R> extends PipelineBuilderStageTask<R> {
 
         /**
          * Build anew instance.
@@ -193,7 +193,7 @@ public final class PipelineBuilder {
     /**
      * Pipeline initial data.
      */
-    private final static class PipelineInitialData {
+    private static final class PipelineInitialData {
 
         public final List<Source<?>> sourceList;
         public final List<Task<?, ?>> taskList;

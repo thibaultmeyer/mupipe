@@ -46,7 +46,7 @@ To speed up process, you can ignore unit tests by using: `-DskipTests=true -Dmav
 final Pipeline pipeline = Pipeline.newBuilder()
     .addSource(new CollectionSource<>(List.of(1, 2, 3, 4, 5, 6)))
     .addTask(new FilterTask<>((element) -> element % 2 == 0))
-    .addSink(new ConsoleOutputSink<>())
+    .addSink(new PrintStreamOutputSink<>(System.out))
     .build();
 ```
 
