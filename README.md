@@ -14,9 +14,9 @@ Pipeline microframework for data processing
 
 ## Microframework
 μPipe (_/mjuː.paɪp/_) is a microframework for implementing data processing pipelines
-simply and very quickly. Depending on the type of processing to be done, it is a pity
-to waste time learning to use tools that are too complex, only to end up using 1% of
-the available functionalities. That is why this project was born.
+simply and very quickly. Depending on the type of processing to be done, you want an
+easy-to-use tool running in minutes, not a complex tool with dedicated hosting. That
+is why this project was born.
 
 
 
