@@ -1,6 +1,7 @@
 package io.github.thibaultmeyer.mupipe.task;
 
 import io.github.thibaultmeyer.mupipe.Pipeline;
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -38,13 +39,13 @@ public class RouterTask<I> implements Task<I, Void> {
     }
 
     @Override
-    public Void execute(final I element, final boolean isLastElementFromSource) throws Exception {
+    public Void execute(final I element, final DataStore dataStore, final boolean isLastElementFromSource) throws Exception {
 
         final Integer idx = this.pipelineDecisionMakerFunction.apply(element);
         final PipelineMethodHandler handler = this.pipelineMethodHandlerList.get(idx);
 
         if (handler != null) {
-            handler.method.invoke(handler.instance, element, isLastElementFromSource);
+            handler.method.invoke(handler.instance, element, dataStore, isLastElementFromSource);
         }
 
         return null;
@@ -59,7 +60,7 @@ public class RouterTask<I> implements Task<I, Void> {
     private PipelineMethodHandler retrievePipelineprocessCurrentElementMethod(final Pipeline pipeline) {
 
         for (final Method method : pipeline.getClass().getDeclaredMethods()) {
-            if (method.getName().equals("processCurrentElement")) {
+            if (method.getName().equals("handleElement")) {
                 method.setAccessible(true);
                 return new PipelineMethodHandler(pipeline, method);
             }

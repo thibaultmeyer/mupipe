@@ -1,5 +1,7 @@
 package io.github.thibaultmeyer.mupipe.task;
 
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public final class AccumulatorTask<T> implements Task<T, List<T>> {
     }
 
     @Override
-    public List<T> execute(final T element, final boolean isLastElementFromSource) {
+    public List<T> execute(final T element, final DataStore dataStore, final boolean isLastElementFromSource) {
 
         this.elementList.add(element);
         if (this.elementList.size() >= this.threshold || isLastElementFromSource) {

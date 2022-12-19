@@ -1,5 +1,6 @@
 package io.github.thibaultmeyer.mupipe.sink;
 
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,11 +33,13 @@ final class PrintStreamSinkTest {
 
         // Arrange
         final Sink<String> sink = new PrintStreamOutputSink<>(System.out);
+        final DataStore dataStore = new DataStore();
 
         // Act
-        sink.execute("apple");
-        sink.execute("banana");
-        sink.execute("cranberry");
+        sink.execute("apple", dataStore);
+        sink.execute("banana", dataStore);
+        sink.execute("cranberry", dataStore);
+        sink.close();
 
         // Assert
         final String removedLineFeed = outputStreamCaptor.toString().replace("\r", "").replace("\n", "");

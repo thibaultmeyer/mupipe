@@ -1,5 +1,6 @@
 package io.github.thibaultmeyer.mupipe;
 
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
 import io.github.thibaultmeyer.mupipe.exception.PipelineException;
 import io.github.thibaultmeyer.mupipe.sink.Sink;
 import io.github.thibaultmeyer.mupipe.source.Source;
@@ -50,6 +51,18 @@ public final class Pipeline {
      */
     public void execute() {
 
+        final DataStore dataStore = new DataStore();
+        this.execute(dataStore);
+    }
+
+    /**
+     * Starts the pipeline.
+     *
+     * @param dataStore Data store
+     * @throws PipelineException If an error occurs during the processing of the pipeline
+     */
+    public void execute(final DataStore dataStore) {
+
         try {
             this.openAllSourceAndSink();
         } catch (final PipelineException exception) {
@@ -64,13 +77,19 @@ public final class Pipeline {
                 final Object element = source.nextElement();
                 final boolean isLastElementFromSource = !source.hasNext() && (idx >= this.sourceList.size() - 1);
 
-                this.processCurrentElement(element, isLastElementFromSource);
+                this.handleElement(element, dataStore, isLastElementFromSource);
             }
         }
 
         this.closeAllSourceAndSink();
     }
 
+    /**
+     * Opens all registered sources and sinks.
+     *
+     * @throws PipelineException.CannotOpenSink   If a sink cannot be opened
+     * @throws PipelineException.CannotOpenSource If a source cannot be opened
+     */
     private void openAllSourceAndSink() {
 
         for (final Source<?> source : this.sourceList) {
@@ -90,6 +109,9 @@ public final class Pipeline {
         }
     }
 
+    /**
+     * Closes all registered sources and sinks.
+     */
     private void closeAllSourceAndSink() {
 
         for (final Source<?> source : this.sourceList) {
@@ -101,12 +123,19 @@ public final class Pipeline {
         }
     }
 
-    private void processCurrentElement(final Object element, final boolean isLastElementFromSource) {
+    /**
+     * Handles an element.
+     *
+     * @param element                 Element to handle
+     * @param dataStore               Data store
+     * @param isLastElementFromSource Indicates if the current element is the last one
+     */
+    private void handleElement(final Object element, final DataStore dataStore, final boolean isLastElementFromSource) {
 
         Object currentElement = element;
         for (final Task<Object, Object> task : this.taskList) {
             try {
-                currentElement = task.execute(currentElement, isLastElementFromSource);
+                currentElement = task.execute(currentElement, dataStore, isLastElementFromSource);
             } catch (final Exception ex) {
                 throw new PipelineException.SourceFailure(ex);
             }
@@ -118,7 +147,7 @@ public final class Pipeline {
 
         for (final Sink<Object> sink : this.sinkList) {
             try {
-                sink.execute(currentElement);
+                sink.execute(currentElement, dataStore);
             } catch (final Exception ex) {
                 throw new PipelineException.SinkFailure(ex);
             }

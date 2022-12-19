@@ -1,5 +1,7 @@
 package io.github.thibaultmeyer.mupipe.sink;
 
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
+
 /**
  * Sink is an end point which accepts an element without returning any.
  *
@@ -28,8 +30,9 @@ public interface Sink<I> extends AutoCloseable {
     /**
      * Execute sink.
      *
-     * @param element Element on which perform sink
+     * @param element   Element on which perform sink
+     * @param dataStore Data store
      * @throws Exception If something goes wrong
      */
-    void execute(final I element) throws Exception;
+    void execute(final I element, final DataStore dataStore) throws Exception;
 }

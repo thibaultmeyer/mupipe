@@ -22,7 +22,7 @@ final class GroupByTaskTest {
         final Pipeline pipeline = Pipeline.newBuilder()
             .addSource(new CollectionSource<>(List.of("cherry", "blueberry", "banana", "apple")))
             .addTask(new GroupByTask<>((element) -> String.valueOf(element.charAt(0))))
-            .addSink(sinkStoreMap::putAll)
+            .addSink((element, dataStore) -> sinkStoreMap.putAll(element))
             .build();
 
         // Act

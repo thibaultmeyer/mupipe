@@ -1,5 +1,7 @@
 package io.github.thibaultmeyer.mupipe.task;
 
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +31,7 @@ public final class GroupByTask<I, K> implements Task<I, Map<K, List<I>>> {
     }
 
     @Override
-    public Map<K, List<I>> execute(final I element, final boolean isLastElementFromSource) {
+    public Map<K, List<I>> execute(final I element, final DataStore dataStore, final boolean isLastElementFromSource) {
 
         final K key = this.keyExtractorFunction.apply(element);
         final List<I> elementList = this.elementMap.computeIfAbsent(key, (k) -> new ArrayList<>());

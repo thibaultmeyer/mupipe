@@ -1,5 +1,7 @@
 package io.github.thibaultmeyer.mupipe.task;
 
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
+
 import java.util.function.Function;
 
 /**
@@ -23,7 +25,7 @@ public class FilterTask<T> implements Task<T, T> {
     }
 
     @Override
-    public T execute(final T element, final boolean isLastElementFromSource) throws Exception {
+    public T execute(final T element, final DataStore dataStore, final boolean isLastElementFromSource) throws Exception {
 
         if (this.filteringDecisionFunction.apply(element) == Boolean.TRUE) {
             return element;

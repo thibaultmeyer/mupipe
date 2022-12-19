@@ -1,5 +1,7 @@
 package io.github.thibaultmeyer.mupipe.sink;
 
+import io.github.thibaultmeyer.mupipe.datastore.DataStore;
+
 import java.io.PrintStream;
 
 /**
@@ -22,7 +24,7 @@ public class PrintStreamOutputSink<I> implements Sink<I> {
     }
 
     @Override
-    public void execute(final I element) throws Exception {
+    public void execute(final I element, final DataStore dataStore) throws Exception {
 
         printStream.println(element);
     }

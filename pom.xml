@@ -120,6 +120,8 @@
                 <configuration>
                     <argLine>
                         --add-opens mupipe/io.github.thibaultmeyer.mupipe=ALL-UNNAMED
+                        --add-opens mupipe/io.github.thibaultmeyer.mupipe.datastore=ALL-UNNAMED
+                        --add-opens mupipe/io.github.thibaultmeyer.mupipe.exception=ALL-UNNAMED
                         --add-opens mupipe/io.github.thibaultmeyer.mupipe.sink=ALL-UNNAMED
                         --add-opens mupipe/io.github.thibaultmeyer.mupipe.source=ALL-UNNAMED
                         --add-opens mupipe/io.github.thibaultmeyer.mupipe.task=ALL-UNNAMED
