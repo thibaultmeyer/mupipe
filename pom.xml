@@ -6,7 +6,7 @@
 
     <groupId>io.github.thibaultmeyer</groupId>
     <artifactId>mupipe</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>μPipe</name>
     <description>Pipeline microframework for data processing</description>
     <url>https://github.com/thibaultmeyer/mupipe</url>

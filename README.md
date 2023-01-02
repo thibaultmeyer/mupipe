@@ -2,7 +2,7 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?logo=github)](https://raw.githubusercontent.com/thibaultmeyer/mupipe/master/LICENSE)
 [![Repository release](https://img.shields.io/github/v/release/thibaultmeyer/mupipe?logo=github)](https://github.com/thibaultmeyer/mupipe/releases)
-[![Maven](https://img.shields.io/maven-central/v/io.github.thibaultmeyer/mupipe.svg?logo=apache-maven)](https://search.maven.org/artifact/io.github.thibaultmeyer/mupipe)
+[![Maven](https://img.shields.io/maven-central/v/io.github.thibaultmeyer/mupipe.svg?logo=apache-maven)](https://central.sonatype.com/artifact/io.github.thibaultmeyer/mupipe/1.0.0/versions)
 [![Repository size](https://img.shields.io/github/repo-size/thibaultmeyer/mupipe.svg?logo=git)](https://github.com/thibaultmeyer/mupipe)
 
 [![Java CI](https://img.shields.io/github/actions/workflow/status/thibaultmeyer/mupipe/build.yml?logo=github&color=%231da868&branch=master)](https://github.com/thibaultmeyer/mupipe/actions/workflows/build.yml)
