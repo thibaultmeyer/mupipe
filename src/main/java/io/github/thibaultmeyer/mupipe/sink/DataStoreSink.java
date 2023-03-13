@@ -13,6 +13,7 @@ import java.util.Set;
  * Stores pipeline elements into data store.
  *
  * @param <I> Input element type
+ * @since 1.0.0
  */
 public class DataStoreSink<I> implements Sink<I> {
 
@@ -26,6 +27,7 @@ public class DataStoreSink<I> implements Sink<I> {
      * @param keySingle Key used to store a single element in the data store
      * @param keyList   Key used to store multiple elements (in list) in the data store
      * @param keySet    Key used to store multiple elements (in set) in the data store
+     * @since 1.0.0
      */
     private DataStoreSink(final DataStoreKey<I> keySingle,
                           final DataStoreKey<List<I>> keyList,
@@ -42,6 +44,7 @@ public class DataStoreSink<I> implements Sink<I> {
      * @param key Key used to store elements in the data store
      * @param <I> Input element type
      * @return Newly created data store sink
+     * @since 1.0.0
      */
     public static <I> DataStoreSink<I> createStoreAsSingle(final DataStoreKey<I> key) {
 
@@ -54,6 +57,7 @@ public class DataStoreSink<I> implements Sink<I> {
      * @param key Key used to store elements in the data store
      * @param <I> Input element type
      * @return Newly created data store sink
+     * @since 1.0.0
      */
     public static <I> DataStoreSink<I> createStoreAsList(final DataStoreKey<List<I>> key) {
 
@@ -66,6 +70,7 @@ public class DataStoreSink<I> implements Sink<I> {
      * @param key Key used to store elements in the data store
      * @param <I> Input element type
      * @return Newly created data store sink
+     * @since 1.0.0
      */
     public static <I> DataStoreSink<I> createStoreAsSet(final DataStoreKey<Set<I>> key) {
 

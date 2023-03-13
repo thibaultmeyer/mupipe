@@ -10,6 +10,7 @@ import io.github.thibaultmeyer.mupipe.source.Source;
  * @see PipelineException.CannotOpenSource
  * @see PipelineException.SinkFailure
  * @see PipelineException.SourceFailure
+ * @since 1.0.0
  */
 public class PipelineException extends RuntimeException {
 
@@ -18,6 +19,7 @@ public class PipelineException extends RuntimeException {
      *
      * @param message The detail message
      * @param cause   The cause
+     * @since 1.0.0
      */
     protected PipelineException(final String message, final Exception cause) {
 
@@ -26,6 +28,8 @@ public class PipelineException extends RuntimeException {
 
     /**
      * Exception indicates that something goes wrong during read from source process.
+     *
+     * @since 1.0.0
      */
     public static class SourceFailure extends PipelineException {
 
@@ -33,6 +37,7 @@ public class PipelineException extends RuntimeException {
          * Build a new instance.
          *
          * @param cause The cause
+         * @since 1.0.0
          */
         public SourceFailure(final Exception cause) {
 
@@ -42,6 +47,8 @@ public class PipelineException extends RuntimeException {
 
     /**
      * Exception indicates that sink process fail.
+     *
+     * @since 1.0.0
      */
     public static class SinkFailure extends PipelineException {
 
@@ -49,6 +56,7 @@ public class PipelineException extends RuntimeException {
          * Build a new instance.
          *
          * @param cause The cause
+         * @since 1.0.0
          */
         public SinkFailure(final Exception cause) {
 
@@ -58,6 +66,8 @@ public class PipelineException extends RuntimeException {
 
     /**
      * Exception indicates that Source can't be opened.
+     *
+     * @since 1.0.0
      */
     public static class CannotOpenSource extends PipelineException {
 
@@ -66,6 +76,7 @@ public class PipelineException extends RuntimeException {
          *
          * @param source The Source that could not be opened
          * @param cause  The cause
+         * @since 1.0.0
          */
         public CannotOpenSource(final Source<?> source, final Exception cause) {
 
@@ -75,6 +86,8 @@ public class PipelineException extends RuntimeException {
 
     /**
      * Exception indicates that Sink can't be opened.
+     *
+     * @since 1.0.0
      */
     public static class CannotOpenSink extends PipelineException {
 
@@ -83,6 +96,7 @@ public class PipelineException extends RuntimeException {
          *
          * @param sink  The Sink that could not be opened
          * @param cause The cause
+         * @since 1.0.0
          */
         public CannotOpenSink(final Sink<?> sink, final Exception cause) {
 

@@ -8,6 +8,7 @@ import java.io.PrintStream;
  * Writes pipeline output into given print stream.
  *
  * @param <I> Input element type
+ * @since 1.0.0
  */
 public class PrintStreamOutputSink<I> implements Sink<I> {
 
@@ -17,6 +18,7 @@ public class PrintStreamOutputSink<I> implements Sink<I> {
      * Build a new instance.
      *
      * @param printStream Print stream to use
+     * @since 1.0.0
      */
     public PrintStreamOutputSink(final PrintStream printStream) {
 

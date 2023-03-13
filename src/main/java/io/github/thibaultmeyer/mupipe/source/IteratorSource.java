@@ -6,6 +6,7 @@ import java.util.Iterator;
  * Reads elements from an iterator.
  *
  * @param <T> Element type
+ * @since 1.0.0
  */
 public final class IteratorSource<T> implements Source<T> {
 
@@ -15,6 +16,7 @@ public final class IteratorSource<T> implements Source<T> {
      * Build a new instance.
      *
      * @param source Source to use
+     * @since 1.0.0
      */
     public IteratorSource(final Iterator<T> source) {
 

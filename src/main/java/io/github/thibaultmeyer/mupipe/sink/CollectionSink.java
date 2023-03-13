@@ -8,6 +8,7 @@ import java.util.Collection;
  * Stores pipeline elements into a collection.
  *
  * @param <I> Input element type
+ * @since 1.0.0
  */
 public class CollectionSink<I> implements Sink<I> {
 
@@ -17,6 +18,7 @@ public class CollectionSink<I> implements Sink<I> {
      * Build a new instance.
      *
      * @param elementCollection Collection in which to write the elements
+     * @since 1.0.0
      */
     public CollectionSink(final Collection<I> elementCollection) {
 

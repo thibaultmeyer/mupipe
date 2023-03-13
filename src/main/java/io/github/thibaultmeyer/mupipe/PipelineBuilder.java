@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Pipeline builder.
+ *
+ * @since 1.0.0
  */
 public final class PipelineBuilder {
 
@@ -17,6 +19,8 @@ public final class PipelineBuilder {
 
     /**
      * Build a new instance.
+     *
+     * @since 1.0.0
      */
     public PipelineBuilder() {
 
@@ -29,6 +33,7 @@ public final class PipelineBuilder {
      * @param source Source to add
      * @param <R>    Type of elements returned by the source
      * @return Current pipeline builder instance
+     * @since 1.0.0
      */
     public <R> PipelineBuilderStageSource<R> addSource(final Source<R> source) {
 
@@ -42,6 +47,7 @@ public final class PipelineBuilder {
      * @param sourceCollection Sources to add
      * @param <R>              Type of elements returned by the source
      * @return Current pipeline builder instance
+     * @since 1.0.0
      */
     public <R> PipelineBuilderStageSource<R> addSource(final Collection<Source<R>> sourceCollection) {
 
@@ -54,6 +60,7 @@ public final class PipelineBuilder {
      *
      * @param <R> Type of elements returned by the source
      * @return Current pipeline builder instance
+     * @since 1.0.0
      */
     public <R> PipelineBuilderStageTask<R> noSource() {
 
@@ -64,6 +71,7 @@ public final class PipelineBuilder {
      * Pipeline builder: Source.
      *
      * @param <R> Type of elements returned by the source
+     * @since 1.0.0
      */
     public static final class PipelineBuilderStageSource<R> extends PipelineBuilderStageTask<R> {
 
@@ -71,6 +79,7 @@ public final class PipelineBuilder {
          * Build anew instance.
          *
          * @param pipelineInitialData Pipeline initial data
+         * @since 1.0.0
          */
         public PipelineBuilderStageSource(final PipelineInitialData pipelineInitialData) {
 
@@ -82,6 +91,7 @@ public final class PipelineBuilder {
          *
          * @param source Source to add
          * @return Current pipeline builder instance
+         * @since 1.0.0
          */
         public PipelineBuilderStageSource<R> addSource(final Source<R> source) {
 
@@ -94,6 +104,7 @@ public final class PipelineBuilder {
          *
          * @param sourceCollection Sources to add
          * @return Current pipeline builder instance
+         * @since 1.0.0
          */
         public PipelineBuilderStageSource<R> addSource(final Collection<Source<R>> sourceCollection) {
 
@@ -106,6 +117,7 @@ public final class PipelineBuilder {
      * Pipeline builder: Task.
      *
      * @param <I> Input element type
+     * @since 1.0.0
      */
     public static class PipelineBuilderStageTask<I> extends PipelineBuilderStageSink<I> {
 
@@ -113,6 +125,7 @@ public final class PipelineBuilder {
          * Build anew instance.
          *
          * @param pipelineInitialData Pipeline initial data
+         * @since 1.0.0
          */
         private PipelineBuilderStageTask(final PipelineInitialData pipelineInitialData) {
 
@@ -125,6 +138,7 @@ public final class PipelineBuilder {
          * @param task Task to add
          * @param <O>  Output element type
          * @return Current pipeline builder instance
+         * @since 1.0.0
          */
         public <O> PipelineBuilderStageTask<O> addTask(final Task<I, O> task) {
 
@@ -137,6 +151,7 @@ public final class PipelineBuilder {
      * Pipeline builder: Sink.
      *
      * @param <I> Input element type
+     * @since 1.0.0
      */
     public static class PipelineBuilderStageSink<I> {
 
@@ -146,6 +161,7 @@ public final class PipelineBuilder {
          * Build anew instance.
          *
          * @param pipelineInitialData Pipeline initial data
+         * @since 1.0.0
          */
         private PipelineBuilderStageSink(final PipelineInitialData pipelineInitialData) {
 
@@ -157,6 +173,7 @@ public final class PipelineBuilder {
          *
          * @param sink Sink to add
          * @return Current pipeline builder instance
+         * @since 1.0.0
          */
         public PipelineBuilderStageSink<I> addSink(final Sink<I> sink) {
 
@@ -169,6 +186,7 @@ public final class PipelineBuilder {
          *
          * @param sinkCollection Sinks to add
          * @return Current pipeline builder instance
+         * @since 1.0.0
          */
         public PipelineBuilderStageSink<I> addSink(final Collection<Sink<I>> sinkCollection) {
 
@@ -180,6 +198,7 @@ public final class PipelineBuilder {
          * Build the pipeline
          *
          * @return A pipeline
+         * @since 1.0.0
          */
         public Pipeline build() {
 
@@ -192,6 +211,8 @@ public final class PipelineBuilder {
 
     /**
      * Pipeline initial data.
+     *
+     * @since 1.0.0
      */
     private static final class PipelineInitialData {
 
@@ -201,6 +222,8 @@ public final class PipelineBuilder {
 
         /**
          * Build a new instance.
+         *
+         * @since 1.0.0
          */
         private PipelineInitialData() {
 

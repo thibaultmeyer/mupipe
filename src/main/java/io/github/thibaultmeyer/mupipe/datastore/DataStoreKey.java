@@ -7,6 +7,7 @@ import java.util.Objects;
  * Data store key.
  *
  * @param <T> Type of the value associated to the key
+ * @since 1.0.0
  */
 public class DataStoreKey<T> {
 
@@ -18,6 +19,7 @@ public class DataStoreKey<T> {
      *
      * @param name      Key name
      * @param valueType Type of the value associated to the key
+     * @since 1.0.0
      */
     public DataStoreKey(final String name, final ValueType<T> valueType) {
 
@@ -32,6 +34,7 @@ public class DataStoreKey<T> {
      * @param valueType Type of the value associated to the key
      * @param <T>       Type of the value associated to the key
      * @return Newly created data store key
+     * @since 1.0.0
      */
     public static <T> DataStoreKey<T> of(final String name, final ValueType<T> valueType) {
 

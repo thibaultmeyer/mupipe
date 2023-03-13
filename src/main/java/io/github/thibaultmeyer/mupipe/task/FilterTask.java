@@ -9,6 +9,7 @@ import java.util.function.Function;
  * If the decision function returns {@code true}, the element will be filtered.
  *
  * @param <T> Input and Output element type
+ * @since 1.0.0
  */
 public class FilterTask<T> implements Task<T, T> {
 
@@ -18,6 +19,7 @@ public class FilterTask<T> implements Task<T, T> {
      * Build a new instance.
      *
      * @param filteringDecisionFunction Filtering decision function
+     * @since 1.0.0
      */
     public FilterTask(final Function<T, Boolean> filteringDecisionFunction) {
 

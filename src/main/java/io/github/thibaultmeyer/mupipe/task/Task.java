@@ -7,6 +7,7 @@ import io.github.thibaultmeyer.mupipe.datastore.DataStore;
  *
  * @param <I> Input element type
  * @param <O> Output element type
+ * @since 1.0.0
  */
 public interface Task<I, O> {
 
@@ -18,6 +19,7 @@ public interface Task<I, O> {
      * @param isLastElementFromSource Indicates if the current element is the last one
      * @return Element transformed by the task
      * @throws Exception If something goes wrong
+     * @since 1.0.0
      */
     O execute(final I element, final DataStore dataStore, final boolean isLastElementFromSource) throws Exception;
 }

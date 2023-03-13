@@ -9,6 +9,7 @@ import java.util.List;
  * Accumulates elements up to the threshold.
  *
  * @param <T> Element type
+ * @since 1.0.0
  */
 public final class AccumulatorTask<T> implements Task<T, List<T>> {
 
@@ -19,6 +20,7 @@ public final class AccumulatorTask<T> implements Task<T, List<T>> {
      * Build a new instance.
      *
      * @param threshold Threshold value
+     * @since 1.0.0
      */
     public AccumulatorTask(final int threshold) {
 

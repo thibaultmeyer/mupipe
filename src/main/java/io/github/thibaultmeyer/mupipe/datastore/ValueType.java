@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 /**
  * @param <T> Type of the value
  * @see <a href="https://stackoverflow.com/questions/3403909/get-generic-type-of-class-at-runtime">stackoverflow.com</a>
+ * @since 1.0.0
  */
 public abstract class ValueType<T> implements Comparable<ValueType<T>> {
 
@@ -13,6 +14,8 @@ public abstract class ValueType<T> implements Comparable<ValueType<T>> {
 
     /**
      * Build a new instance.
+     *
+     * @since 1.0.0
      */
     protected ValueType() {
 
@@ -24,6 +27,7 @@ public abstract class ValueType<T> implements Comparable<ValueType<T>> {
      * Returns the value type.
      *
      * @return Java type
+     * @since 1.0.0
      */
     public Type getType() {
 
@@ -35,6 +39,7 @@ public abstract class ValueType<T> implements Comparable<ValueType<T>> {
      *
      * @param o the object to be compared.
      * @return 0 if the value type are same
+     * @since 1.0.0
      */
     public int compareTo(final ValueType<T> o) {
 

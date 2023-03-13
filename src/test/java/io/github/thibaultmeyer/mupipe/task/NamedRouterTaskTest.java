@@ -10,12 +10,13 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
-final class RouterTaskTest {
+final class NamedRouterTaskTest {
 
     @Test
-    void router() {
+    void namedRouter() {
 
         // Arrange
         final List<Integer> evenSinkStoreList = new ArrayList<>();
@@ -33,7 +34,9 @@ final class RouterTaskTest {
 
         final Pipeline pipeline = Pipeline.newBuilder()
             .addSource(new CollectionSource<>(List.of(1, 2, 3, 4, 5, 6)))
-            .addTask(new RouterTask<>(List.of(evenPipeline, oddPipeline), (element) -> element % 2))
+            .addTask(new NamedRouterTask<>(
+                Map.of("even", evenPipeline, "odd", oddPipeline),
+                (element) -> element % 2 == 0 ? "even" : "odd"))
             .build();
 
         // Act

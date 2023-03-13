@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Pipeline.
+ *
+ * @since 1.0.0
  */
 public final class Pipeline {
 
@@ -23,6 +25,7 @@ public final class Pipeline {
      * @param sourceList Sources to use
      * @param taskList   Tasks to execute
      * @param sinkList   Sinks to use
+     * @since 1.0.0
      */
     @SuppressWarnings("unchecked")
     Pipeline(final List<Source<?>> sourceList,
@@ -38,6 +41,7 @@ public final class Pipeline {
      * Creates a new pipeline builder.
      *
      * @return Newly created pipeline builder
+     * @since 1.0.0
      */
     public static PipelineBuilder newBuilder() {
 
@@ -48,6 +52,7 @@ public final class Pipeline {
      * Starts the pipeline.
      *
      * @throws PipelineException If an error occurs during the processing of the pipeline
+     * @since 1.0.0
      */
     public void execute() {
 
@@ -60,6 +65,7 @@ public final class Pipeline {
      *
      * @param dataStore Data store
      * @throws PipelineException If an error occurs during the processing of the pipeline
+     * @since 1.0.0
      */
     public void execute(final DataStore dataStore) {
 
@@ -89,6 +95,7 @@ public final class Pipeline {
      *
      * @throws PipelineException.CannotOpenSink   If a sink cannot be opened
      * @throws PipelineException.CannotOpenSource If a source cannot be opened
+     * @since 1.0.0
      */
     private void openAllSourceAndSink() {
 
@@ -111,6 +118,8 @@ public final class Pipeline {
 
     /**
      * Closes all registered sources and sinks.
+     *
+     * @since 1.0.0
      */
     private void closeAllSourceAndSink() {
 
@@ -129,6 +138,7 @@ public final class Pipeline {
      * @param element                 Element to handle
      * @param dataStore               Data store
      * @param isLastElementFromSource Indicates if the current element is the last one
+     * @since 1.0.0
      */
     private void handleElement(final Object element, final DataStore dataStore, final boolean isLastElementFromSource) {
 
@@ -159,6 +169,7 @@ public final class Pipeline {
      * This is typically used in finally blocks.
      *
      * @param autoCloseable The closeable to close
+     * @since 1.0.0
      */
     private void closeWithoutException(final AutoCloseable autoCloseable) {
 

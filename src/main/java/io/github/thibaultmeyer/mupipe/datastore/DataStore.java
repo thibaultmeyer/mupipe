@@ -6,6 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * The data store allows for the persistence of information that
  * can then be accessed in all subsequent stages of the pipeline.
+ *
+ * @since 1.0.0
  */
 public final class DataStore {
 
@@ -13,6 +15,8 @@ public final class DataStore {
 
     /**
      * Build a new instance.
+     *
+     * @since 1.0.0
      */
     public DataStore() {
 
@@ -25,6 +29,7 @@ public final class DataStore {
      * @param key Typed key
      * @param <T> Value type
      * @return Value associated to the specified key, otherwise, {@code null}
+     * @since 1.0.0
      */
     @SuppressWarnings("unchecked")
     public <T> T get(final DataStoreKey<T> key) {
@@ -39,6 +44,7 @@ public final class DataStore {
      * @param value Value to associate with the given key
      * @param <T>   Value type
      * @return Previous value associated with key, otherwise, {@code null}
+     * @since 1.0.0
      */
     @SuppressWarnings("unchecked")
     public <T> T put(final DataStoreKey<T> key, T value) {
@@ -52,6 +58,7 @@ public final class DataStore {
      * @param key Typed key
      * @param <T> Value type
      * @return Value associated to the specified key, otherwise, {@code null}
+     * @since 1.0.0
      */
     @SuppressWarnings("unchecked")
     public <T> T remove(final DataStoreKey<T> key) {
@@ -63,6 +70,7 @@ public final class DataStore {
      * Returns the number value stored in the data store.
      *
      * @return Number value stored in the data store
+     * @since 1.0.0
      */
     public int size() {
 

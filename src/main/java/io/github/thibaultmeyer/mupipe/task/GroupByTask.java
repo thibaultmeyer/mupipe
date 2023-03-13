@@ -13,6 +13,7 @@ import java.util.function.Function;
  *
  * @param <I> Input element type
  * @param <K> Output map key type
+ * @since 1.0.0
  */
 public final class GroupByTask<I, K> implements Task<I, Map<K, List<I>>> {
 
@@ -23,6 +24,7 @@ public final class GroupByTask<I, K> implements Task<I, Map<K, List<I>>> {
      * Build a new instance.
      *
      * @param keyExtractorFunction Function to extract element key
+     * @since 1.0.0
      */
     public GroupByTask(final Function<I, K> keyExtractorFunction) {
 
