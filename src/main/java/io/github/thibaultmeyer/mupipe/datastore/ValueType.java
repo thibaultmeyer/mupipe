@@ -4,6 +4,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
+ * A value type wrapper.
+ *
  * @param <T> Type of the value
  * @see <a href="https://stackoverflow.com/questions/3403909/get-generic-type-of-class-at-runtime">stackoverflow.com</a>
  * @since 1.0.0
