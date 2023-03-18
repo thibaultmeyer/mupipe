@@ -19,7 +19,7 @@ public class NetworkUDPSource implements Source<byte[]> {
     /**
      * Build a new instance.
      *
-     * @param listenPort Port on which listen for incomming data
+     * @param listenPort Port on which listen for incoming data
      * @param bufferSize Buffer size. If a packet is larger than given size, the excess will be discarded
      * @throws SocketException If an error occurs when creating the socket
      * @since 1.0.0
