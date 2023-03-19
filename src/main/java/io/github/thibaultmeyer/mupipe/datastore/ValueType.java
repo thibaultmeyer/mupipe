@@ -12,6 +12,9 @@ import java.lang.reflect.Type;
  */
 public abstract class ValueType<T> implements Comparable<ValueType<T>> {
 
+    /**
+     * Type of the value.
+     */
     protected final Type javaValueType;
 
     /**

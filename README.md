@@ -8,6 +8,9 @@
 [![Java CI](https://img.shields.io/github/actions/workflow/status/thibaultmeyer/mupipe/build.yml?logo=github&color=%231da868&branch=master)](https://github.com/thibaultmeyer/mupipe/actions/workflows/build.yml)
 [![CodeQL](https://img.shields.io/github/actions/workflow/status/thibaultmeyer/mupipe/codeql-analysis.yml?label=codeql&logo=github&color=%231da868&branch=master)](https://github.com/thibaultmeyer/mupipe/actions/workflows/codeql-analysis.yml)
 
+[![Javadoc](https://javadoc.io/badge2/io.github.thibaultmeyer/mupipe/javadoc.svg)](https://javadoc.io/doc/io.github.thibaultmeyer/mupipe)
+
+
 Pipeline microframework for data processing
 *****
 
@@ -44,7 +47,8 @@ To speed up process, you can ignore unit tests by using: `-DskipTests=true -Dmav
 
 ```java
 final Pipeline pipeline = Pipeline.newBuilder()
-    .addSource(new CollectionSource<>(List.of(1, 2, 3, 4, 5, 6)))
+    .addSource(new CollectionSource<>(List.of("1", "2", "3", "4", "5", "6")))
+    .addTask((element, dataStore, isLastElementFromSource) -> Integer.parseInt(element))
     .addTask(new FilterTask<>((element) -> element % 2 == 0))
     .addSink(new PrintStreamOutputSink<>(System.out))
     .build();

@@ -1,5 +1,8 @@
 /**
  * μPipe module.
+ *
+ * @see io.github.thibaultmeyer.mupipe.Pipeline
+ * @see io.github.thibaultmeyer.mupipe.PipelineBuilder
  */
 module mupipe {
 
