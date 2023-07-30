@@ -58,3 +58,10 @@ final Pipeline pipeline = Pipeline.newBuilder()
 
 ## License
 This project is released under terms of the [MIT license](https://raw.githubusercontent.com/thibaultmeyer/mupipe/master/LICENSE).
+
+
+
+## Third party
+
+Logo is from [Flaticon](https://www.flaticon.com) with
+free usage for personal and commercial purpose. <a href="https://www.flaticon.com/free-icons/pipeline" title="pipeline icons">Pipeline icons created by surang - Flaticon</a>
