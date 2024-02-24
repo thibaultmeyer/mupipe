@@ -147,7 +147,7 @@ public final class Pipeline {
             try {
                 currentElement = task.execute(currentElement, dataStore, isLastElementFromSource);
             } catch (final Exception ex) {
-                throw new PipelineException.SourceFailure(ex);
+                throw new PipelineException.TaskFailure(ex);
             }
 
             if (currentElement == null) {

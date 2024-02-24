@@ -46,6 +46,25 @@ public class PipelineException extends RuntimeException {
     }
 
     /**
+     * Exception indicates that something goes wrong during task process.
+     *
+     * @since 1.3.0
+     */
+    public static class TaskFailure extends PipelineException {
+
+        /**
+         * Build a new instance.
+         *
+         * @param cause The cause
+         * @since 1.3.0
+         */
+        public TaskFailure(final Exception cause) {
+
+            super("Cannot process element", cause);
+        }
+    }
+
+    /**
      * Exception indicates that sink process fail.
      *
      * @since 1.0.0
